@@ -1,0 +1,6 @@
+{
+  "name": "Finca El Sembrador",
+  "description": "Landing page interactiva para la reserva de cajas de verduras locales y de temporada de la Finca El Sembrador, con eventos interactivos avanzados.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

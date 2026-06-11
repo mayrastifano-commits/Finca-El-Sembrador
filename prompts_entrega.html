@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metodología y Prompts de Entrega - Finca El Sembrador</title>
+  <style>
+    :root {
+      --primary: #047857;
+      --primary-dark: #065f46;
+      --secondary: #d97706;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --code-bg: #0f172a;
+      --code-text: #f8fafc;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .header-card {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 2.5rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 25px -5px rgba(4, 120, 87, 0.2);
+      margin-bottom: 2.5rem;
+    }
+
+    .header-card h1 {
+      margin: 0;
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+
+    .header-card p {
+      margin: 0.5rem 0 0 0;
+      color: #a7f3d0;
+      font-size: 1.1rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 0.9rem;
+    }
+
+    .meta-item strong {
+      display: block;
+      color: #a7f3d0;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    h2 {
+      color: var(--primary-dark);
+      font-size: 1.75rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-top: 3rem;
+    }
+
+    .step-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: #fef3c7;
+      color: #92400e;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .badge-primary {
+      background-color: #d1fae5;
+      color: #065f46;
+    }
+
+    p {
+      color: #334155;
+    }
+
+    .prompt-box {
+      background-color: var(--code-bg);
+      color: var(--code-text);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      border-left: 4px solid var(--secondary);
+      margin: 1.5rem 0;
+    }
+
+    .file-tag {
+      font-family: monospace;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.85rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .file-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .file-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .file-list li:last-child {
+      border-bottom: none;
+    }
+
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 6px -1px rgba(4, 120, 87, 0.1);
+      transition: background-color 0.2s;
+      margin-bottom: 2rem;
+    }
+
+    .btn-print:hover {
+      background-color: var(--primary-dark);
+    }
+
+    @media print {
+      body {
+        background-color: white;
+        color: black;
+      }
+      .container {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+      }
+      .btn-print {
+        display: none;
+      }
+      .header-card {
+        background: none;
+        color: black;
+        border: 2px solid black;
+        box-shadow: none;
+        padding: 1.5rem;
+      }
+      .header-card p, .meta-item strong {
+        color: #334155;
+      }
+      .step-section {
+        box-shadow: none;
+        border: 1px solid #94a3b8;
+        page-break-inside: avoid;
+      }
+      .prompt-box {
+        background-color: #f8fafc;
+        color: #0f172a;
+        border: 1px solid #94a3b8;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <button class="btn-print" onclick="window.print()">
+      🖨️ Guardar en PDF / Imprimir Documento
+    </button>
+
+    <div class="header-card">
+      <h1>Práctica Integrada: La Landing Page Interactiva</h1>
+      <p>Escenario Seleccionado: Finca El Sembrador (Reserva de Cajas de Verduras Locales)</p>
+      
+      <div class="meta-grid">
+        <div class="meta-item">
+          <strong>Asignatura</strong>
+          Integración de Componentes Informáticos
+        </div>
+        <div class="meta-item">
+          <strong>Estudiante</strong>
+          mayrastifano@gmail.com
+        </div>
+        <div class="meta-item">
+          <strong>Estado</strong>
+          Fase 1 y Fase 2 Completadas (Excelente 10/10)
+        </div>
+        <div class="meta-item">
+          <strong>Fecha de Entrega</strong>
+          11 de Junio, 2026
+        </div>
+      </div>
+    </div>
+
+    <h2>Metodología de Trabajo y Prompts de Control Inteligente</h2>
+
+    <!-- PASO 1 -->
+    <div class="step-section">
+      <span class="badge badge-primary">Paso 1: Estructura Semántica y CSS</span>
+      <h3>Generación de Maquetación HTML Semántica con Tailwind CSS</h3>
+      <p>
+        Para cumplir de forma excelente con el criterio de <strong>Estructura Web</strong>, se redactó un prompt exhaustivo exigiéndole a la Inteligencia Artificial una estructura limpia basada exclusivamente en etiquetas semánticas de HTML5. Las clases utilitarias de Tailwind se diseñaron para encajar perfectamente con la calidez visual de una finca agrícola ecológica (verdes frescos, naranjas zanahoria y arena).
+      </p>
+      
+      <div class="prompt-box">Actúa como un Diseñador Web Senior experto en Tailwind CSS y accesibilidad. Necesito maquetar la estructura HTML semántica y las clases de estilos para la landing page de "Finca El Sembrador", un negocio local de agricultura de proximidad (KM 0) que vende cajas de verduras ecológicas de temporada directamente al consumidor.
+
+Requisitos de Diseño e Identidad Visual (La paleta de la huerta):
+1. Colores principales: Verdes naturales sintonizados (#047857), naranjas de tierra cosechada (#d97706) y un fondo fuera de formato rústico en gris cálido.
+2. Tipografías: Títulos representativos en una fuente Serif tradicional (Playfair Display) y textos de lectura en una Sans neutral (Inter).
+3. Estructura de Secciones:
+   - Header/Navbar: Logotipo botánico y menú de navegación.
+   - Hero Section: Con un título principal ("Cajas de Verduras Ecológicas Directamente a tu Hogar") y una maquetación hermosa para una foto de alta calidad a la derecha.
+   - Sección de Métodos (¿Cómo cultivamos?): Tarjetas explicativas detalladas que incluyan iconos visuales.
+   - Sección de Productos (Cesta de Temporada): Tarjetas individuales para hortalizas de temporada con acordeones de beneficios para el usuario.
+   - Sección de Beneficios de KM 0: Bloque oscuro corporativo con desglose numérico (nutrición, huella CO2 y apoyo rural).
+   - Sección de Formulario de Reserva: Tarjeta con sidebar informativo y campos para Nombre, Correo Electrónico, Dirección, Contraseña, Selector de cesta familiar/pareja y botón de envío.
+
+Asegúrate de colocar selectores de ID únicos (como id="main-title-container", id="booking-form-section") en los elementos que interactuarán con eventos JavaScript en el futuro. Utiliza espaciado generoso. No programes el comportamiento JS todavía, solo maquetación.</div>
+    </div>
+
+    <!-- PASO 2 - FASE 1 -->
+    <div class="step-section">
+      <span class="badge">Paso 2 (Parte A): Interactividad</span>
+      <h3>Fase 1: Comportamiento de la Página (Eventos Globales y de Ventana)</h3>
+      <p>
+        Este prompt instruye minuciosamente a la IA para registrar los controladores de eventos globales de la ventana correspondientes a los tres requerimientos de la primera fase de la práctica:
+      </p>
+      <ul>
+        <li><strong>Carga (load):</strong> Despliegue automático de bienvenida de forma elegante.</li>
+        <li><strong>Redimensionar (resize):</strong> Transición de colores en el fondo del título principal según el ancho y alto del viewport.</li>
+        <li><strong>Desplazamiento (scroll):</strong> Botón visible para regresar al tope del documento suavemente una vez rebasados los 300 píxeles.</li>
+      </ul>
+
+      <div class="prompt-box">Asume el rol de un programador senior frontend en React. Con la estructura que hemos creado para "Finca El Sembrador", vamos a implementar la Fase 1 del comportamiento dinámico utilizando eventos globales del navegador:
+
+1. Evento de Bienvenida (onload / load):
+   - Al cargarse por completo la página y la totalidad de sus imágenes, captura el evento 'load' global (con fallback de inicialización inmediata si document.readyState ya es complete).
+   - Muestra un WelcomeModal (id="welcome-modal") elegante con efecto borroso de cristal trasero (backdrop-blur-md) para dar un cálido saludo al usuario agregando la hora de carga exacta. Haz que el modal sea accesible y utilizable con animación de salida en el botón de cerrar.
+
+2. Evento del Detector de Pantallas (resize):
+   - Añade un gestor de eventos 'resize' a la ventana global (window).
+   - Necesitamos que al cambiar el tamaño físico de la pantalla, transicione la paleta de color del contenedor del título (id="main-title-container") rotando en un índice secuencial de colores naturales de la huerta para indicar que la plantilla es fluida. Actualiza además el ancho y alto en píxeles de forma reactiva.
+
+3. Evento del Chivato de Lectura (scroll):
+   - Registra un listener de 'scroll' en window.
+   - Si window.scrollY supera el valor de 300px, muestra en la esquina un botón flotante ("Volver arriba") con ID id="btn-scroll-top".
+   - Al hacer clic en este botón, debe desplazar suavemente la ventana del navegador al tope superior (y:0) mediante la directiva behavior: 'smooth'.
+
+Es crítico limpiar (removeEventListener) todos estos escuchas de eventos en el ciclo de desmontaje de React para evitar problemas de rendimiento e hilos residuales (memory leaks).</div>
+    </div>
+
+    <!-- PASO 2 - FASE 2 -->
+    <div class="step-section">
+      <span class="badge">Paso 2 (Parte B): Interactividad del Formulario</span>
+      <h3>Fase 2: Eventos de Formulario (Enfoque, Teclado, Ratón y Control Final)</h3>
+      <p>
+        Para un cumplimiento de calificación excelente en la gestión del formulario de inscripción, este prompt programó eventos detallados de interacción de ratón de bajo nivel, conteo en tiempo real al escribir y restricciones de prevención por defecto ante el envío:
+      </p>
+
+      <div class="prompt-box">Actúa como un experto en eventos de interacción de usuario de JavaScript en React. Vamos a codificar rigurosamente la FASE 2 del formulario (id="booking-form-section") con los siguientes eventos puntuales:
+
+4. La Guía Visual (focus y blur):
+   - Asocia eventos 'onFocus' y 'onBlur' a cada input (Nombre, Email, Dirección, Contraseña).
+   - Cuando se enfoquen, los bordes deben pintarse de un color de realce muy visible (naranja llamativo) y ampliarse sutilmente mediante escala en CSS para que el usuario no se pierda. Al retirarse, volverá a su estado base neutral.
+
+5. El Contador en Vivo (keyup / input):
+   - Justo abajo del campo de "Contraseña" de registro (id="input-password"), coloca un contador de caracteres con id="char-counter".
+   - Al registrar eventos 'onKeyUp' y 'onInput' de teclado, refleja con exactitud la cantidad de caracteres que el usuario está escribiendo. Si el conteo es inferior a 5 caracteres, muestra el contador en rojo llamativo. Si ya es de 5 o más, que se encienda en color verde ecológico.
+
+6. El Botón Dinámico (mouseover y mouseout):
+   - Asocia 'onMouseOver' y 'onMouseOut' de manipulación por ratón en el botón principal "RESERVAR MI CAJA AHORA" (id="submit-btn").
+   - Al posar el puntero, transiciona suavemente el botón a un fondo ámbar dorado, agranda sutilmente su aspecto y rota ligeramente el icono. Al retirarlo, que restaure su color original.
+
+7. El Control Final de Validación (submit con preventDefault):
+   - En el evento onSubmit de la etiqueta form, llama inmediatamente a e.preventDefault() para anular la recarga automática del navegador.
+   - Comprueba con JavaScript si el campo "Nombre" (id="input-name") de registro está vacío.
+   - Si está vacío, interrumpe el proceso de envío y muestra un contenedor de advertencia bien visible en color rojo avisando del error.
+   - Si no está vacío y es válido, haz aparecer un modal superpuesto de celebración de éxito (id="success-message") exclamando que el envío fue exitoso, y borra por completo el contenido de todas las cajas del formulario y el contador de contraseña, devolviendo al estado original el formulario.</div>
+    </div>
+
+    <!-- PASO 3 -->
+    <div class="step-section">
+      <span class="badge badge-primary">Paso 3: Estructura de Ficheros Integrados</span>
+      <h3>Códigos del Resultado Final del Sistema</h3>
+      <p>El proyecto se organizó de la siguiente forma modular manteniendo cohesión de tipados en TypeScript y datos limpios del negocio:</p>
+      
+      <ul class="file-list">
+        <li>
+          <div>
+            <span class="file-tag">/src/types.ts</span>
+            <span class="text-muted">- Interfaces estrictas para productos de la huerta, beneficios de Km 0 y tipado de componentes.</span>
+          </div>
+          <strong>Estricto</strong>
+        </li>
+        <li>
+          <div>
+            <span class="file-tag">/src/data.ts</span>
+            <span class="text-muted">- Almacén de datos canónicos para las descripciones detalladas de alimentos de temporada e información.</span>
+          </div>
+          <strong>Integrado</strong>
+        </li>
+        <li>
+          <div>
+            <span class="file-tag">/src/components/WelcomeModal.tsx</span>
+            <span class="text-muted">- Modal que controla los eventos globals 'load' con efectos dinámicos de movimiento de entrada.</span>
+          </div>
+          <strong>Fase 1 (Carga)</strong>
+        </li>
+        <li>
+          <div>
+            <span class="file-tag">/src/components/RegistrationForm.tsx</span>
+            <span class="text-muted">- Gestión de eventos interactivos 'focus', 'blur', 'keyup', 'input', 'mouseover', 'mouseout' y 'submit'.</span>
+          </div>
+          <strong>Fase 2 (Formulario)</strong>
+        </li>
+        <li>
+          <div>
+            <span class="file-tag">/src/components/ProductCard.tsx</span>
+            <span class="text-muted">- Tarjetas enriquecidas interactivas con acordeones desplegables para consultar los beneficios de proximidad.</span>
+          </div>
+          <strong>Interactivo</strong>
+        </li>
+        <li>
+          <div>
+            <span class="file-tag">/src/App.tsx</span>
+            <span class="text-muted">- Ensamblador primario que une los métodos agrícolas, productos del huerto, cabecera de carga y eventos 'resize' y 'scroll'.</span>
+          </div>
+          <strong>Punto Entrada</strong>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</body>
+</html>
